@@ -1,0 +1,5 @@
+Player.create(name: 'LNM')
+Player.create(name: 'KJF')
+Game.create(name: 'Ruby Racer 1')
+Round.create(player_id: 1, game_id: 1, winner: true, winning_time: '1234')
+Round.create(player_id: 2, game_id: 1, winner: false)
