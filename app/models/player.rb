@@ -6,7 +6,7 @@ class Player < ActiveRecord::Base
   has_many :games, through: :rounds
   # Remember to create a migration!
   def self.add_player(player)
-    found_player = Player.where(name: player).first
+    found_player = Player.find_by_name(player)
     if found_player.nil?
       Player.create(name: player)
     else

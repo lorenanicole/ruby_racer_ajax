@@ -4,6 +4,7 @@ get '/' do
 end
 
 post '/play' do
+  puts params
   @player1 = Player.add_player(params[:player1])
   @player2 = Player.add_player(params[:player2])
   game = Game.new(name: (1...1000000).to_a.sample)
@@ -16,17 +17,21 @@ post '/play' do
 end
 
 post '/results' do
-  if params[:value] == '1'
-    game = Game.find(session[:game])
-    game.players.find(session[:player1]).winner = true
-    game.save
-  elsif params[:value] == '2'
-    game = Game.find(session[:game])
-    game.players.find(session[:player2]).winner = true
-    game.save
+  puts params
+  if params[:data] == '1'
+    players = Round.where(game_id: session[:game])
+    players.find_by_player_id(session[:player1]).update_attributes(winner: true, winning_time: params[:time])
+    players.find_by_player_id(session[:player2]).update_attributes(winner: false, winning_time: params[:time])
+    redirect '/stats'
+  elsif params[:data] == '2'
+    players = Round.where(game_id: session[:game])
+    players.find_by_player_id(session[:player2]).update_attributes(winner: true, winning_time: params[:time])
+    players.find_by_player_id(session[:player1]).update_attributes(winner: false, winning_time: params[:time])
+    redirect '/stats'
   end
 end
 
 get '/stats' do
+
   erb :stats
 end

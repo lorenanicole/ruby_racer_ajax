@@ -14,7 +14,7 @@ class CreateTables < ActiveRecord::Migration
     create_table :rounds do |t|
       t.integer :player_id
       t.integer :game_id
-      t.boolean :winner
+      t.boolean :winner, default: false
       t.string :winning_time
       t.timestamps
     end
