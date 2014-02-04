@@ -24,6 +24,6 @@ th {
   border: 1px solid red;
 }
 
-#results {
+#results, #play-again {
   display: none;
 }

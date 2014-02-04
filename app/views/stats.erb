@@ -1,3 +1,17 @@
 <div class='container'>
 <h1>Woohoo!</h1>
+
+  <ul class="stats">
+  <% if @round_records %>
+    <li>Winner: <%= @winner_name %></li>
+    <li>Loser: <%= @loser_name %></li>
+    <li>Hot Damn Look at That Play Time: <%= @player_1.winning_time %> miliseconds</li>
+  <% end %>
+  </ul>
+
+  <% if @round_records %>
+  <p>Your custom game report is always available <a href= "/stats/<%= @game_id %>">here</a></p>
+  <% end %>
+
+  <a href="/">Woohoo take me back home!</a>
 </div>
